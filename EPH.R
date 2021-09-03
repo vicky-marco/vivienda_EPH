@@ -10,6 +10,7 @@ base_P1 <- base %>%
 
 
 base_P1 <-as.data.frame(lapply(base_P1, rep, base_P1$PONDERA))
+write_xlsx(base_P1, "base_base.xlsx")
 
 base_P1_1 <- base_P1 %>% 
   group_by(DECIFR, II7) %>% 
@@ -31,3 +32,36 @@ library(rJava)
 library(writexl)
 
 write_xlsx(base_P1_1, "base_11.xlsx")
+
+quiebres <- c(0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1)
+
+base_3 <- mutate(base_P1, decil=cut(ITF,breaks = quantile(ITF,quiebres,na.rm = TRUE, dig.lab = 10),include.lowest = TRUE))
+
+base_4 <- base_P1 %>% select(ITF)
+
+class(base_4$ITF)
+
+
+quantiles <-  quantile(base_P1$ITF, prob = seq(0, 1, length = 11), type = 5, na.rm = TRUE) 
+  
+data_cortada <- cut(base_P1$ITF, breaks = as.numeric(quantiles))
+
+devtools::install_github("holatam/eph")
+1
+library(eph)
+base_2021t1_hog <- get_microdata(year = 2021, trimester = 1, type = 'hogar')
+
+TABLA <- calculate_tabulates(base, x = "DECIFR", y = "II7", add.totals = "row", add.percentage = "col")
+
+TABLA_2 <- calculate_tabulates(base, x = "DECCFR", y = "II7", add.totals = "row", add.percentage = "col")
+
+write_xlsx(TABLA, "TABLA.xlsx")
+
+write_xlsx(TABLA_2, "TABLA2.xlsx")
+
+
+
+
+
+
+
