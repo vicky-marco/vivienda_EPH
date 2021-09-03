@@ -23,7 +23,11 @@ base_P1_2 <- base_P1 %>%
 
 library(xlsx)
 
-base_P1_1 <- write.xlsx(base_P1_1, "base_1.xlsx")
+library(readxl)
 
 
+library(rJava)
 
+library(writexl)
+
+write_xlsx(base_P1_1, "base_11.xlsx")
