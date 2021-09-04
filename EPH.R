@@ -60,8 +60,27 @@ write_xlsx(TABLA, "TABLA.xlsx")
 write_xlsx(TABLA_2, "TABLA2.xlsx")
 
 
+TABLA_3 <- calculate_tabulates(base, x = "II7", y = "DECIFR", add.totals = "row", add.percentage = "col")
 
+TABLA_4 <- calculate_tabulates(base, x = "II7", y = "DECCFR", add.totals = "row", add.percentage = "col")
 
+TABLA_5 <- calculate_tabulates(base, x = "DECIFR", y = "IV1", add.totals = "row", add.percentage = "col")
 
+write_xlsx(TABLA_5, "TABLA5.xlsx")
 
+write_xlsx(TABLA_3, "TABLA3.xlsx")
+
+write_xlsx(TABLA_4, "TABLA4.xlsx")
+
+TABLA_6 <- calculate_tabulates(base, x = "IV1", y = "DECIFR", add.totals = "row", add.percentage = "col")
+
+write_xlsx(TABLA_6, "TABLA6.xlsx")
+
+TABLA_7 <- calculate_tabulates(base, x = "DECIFR", y = "IV12_3", add.totals = "row", add.percentage = "col")
+
+TABLA_8 <- calculate_tabulates(base, x = "IV12_3", y = "DECIFR", add.totals = "row", add.percentage = "col")
+
+write_xlsx(TABLA_7, "TABLA7.xlsx")
+
+write_xlsx(TABLA_8, "TABLA8.xlsx")
 
