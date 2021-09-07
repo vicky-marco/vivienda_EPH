@@ -49,6 +49,8 @@ data_cortada <- cut(base_P1$ITF, breaks = as.numeric(quantiles))
 devtools::install_github("holatam/eph")
 1
 library(eph)
+library(tidyverse)
+
 base_2021t1_hog <- get_microdata(year = 2021, trimester = 1, type = 'hogar')
 
 TABLA <- calculate_tabulates(base, x = "DECIFR", y = "II7", add.totals = "row", add.percentage = "col")
@@ -83,4 +85,68 @@ TABLA_8 <- calculate_tabulates(base, x = "IV12_3", y = "DECIFR", add.totals = "r
 write_xlsx(TABLA_7, "TABLA7.xlsx")
 
 write_xlsx(TABLA_8, "TABLA8.xlsx")
+
+TABLA_9 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "DECIFR", 
+                      y = "II7",
+                      weights = "PONDIH",
+                      add.percentage = "col",
+                      add.totals = "row")
+
+write_xlsx(TABLA_9, "TABLA9.xlsx")
+
+
+TABLA_10 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "DECCFR", 
+                      y = "II7",
+                      weights = "PONDIH",
+                      add.percentage = "col",
+                      add.totals = "row")
+
+
+write_xlsx(TABLA_10, "TABLA10.xlsx")
+
+TABLA_11 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "DECIFR", 
+                      y = "IV1",
+                      weights = "PONDIH",
+                      add.percentage = "col",
+                      add.totals = "row")
+
+write_xlsx(TABLA_11, "TABLA11.xlsx")
+
+TABLA_12 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "DECIFR", 
+                      y = "IV12_3",
+                      weights = "PONDIH",
+                      add.percentage = "col",
+                      add.totals = "row")
+
+write_xlsx(TABLA_12, "TABLA12.xlsx")
+
+TABLA_13 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "II7", 
+                      y = "DECIFR",
+                      weights = "PONDIH",
+                      add.percentage = "row",
+                      add.totals = "col")
+
+
+write_xlsx(TABLA_13, "TABLA13.xlsx")
+
+
+TABLA_14 <- base_2021t1_hog %>% 
+  mutate(DECIFR = factor(DECIFR, levels = 0:12)) %>% 
+  calculate_tabulates(x = "IV12_3", 
+                      y = "DECIFR",
+                      weights = "PONDIH",
+                      add.percentage = "row",
+                      add.totals = "col")
+
+write_xlsx(TABLA_14, "TABLA14.xlsx")
 
